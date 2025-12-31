@@ -1,0 +1,100 @@
+// utils/animation.ts
+
+/**
+ * Fades in an element by setting its opacity from 0 to 1.
+ * @param element - The HTML element to fade in.
+ * @param duration - The duration of the animation in milliseconds. Defaults to 300ms.
+ */
+export const fadeIn = (element: HTMLElement, duration: number = 300): void => {
+  element.style.opacity = '0';
+  element.style.transition = `opacity ${duration}ms ease-in-out`;
+  element.style.display = 'block'; // or any other display value that suits your element
+  setTimeout(() => {
+    element.style.opacity = '1';
+  }, 10); // A small delay to ensure the transition is triggered
+};
+
+/**
+ * Slides in an element from the left by changing its translateX value.
+ * @param element - The HTML element to slide in.
+ * @param distance - The distance to slide in pixels. Defaults to 50px.
+ * @param duration - The duration of the animation in milliseconds. Defaults to 300ms.
+ */
+export const slideInLeft = (element: HTMLElement, distance: number = 50, duration: number = 300): void => {
+  element.style.transform = `translateX(-${distance}px)`;
+  element.style.opacity = '0';
+  element.style.transition = `transform ${duration}ms ease-in-out, opacity ${duration}ms ease-in-out`;
+  element.style.display = 'block'; // or any other display value
+  setTimeout(() => {
+    element.style.transform = 'translateX(0)';
+    element.style.opacity = '1';
+  }, 10);
+};
+
+/**
+ * Slides in an element from the right by changing its translateX value.
+ * @param element - The HTML element to slide in.
+ * @param distance - The distance to slide in pixels. Defaults to 50px.
+ * @param duration - The duration of the animation in milliseconds. Defaults to 300ms.
+ */
+export const slideInRight = (element: HTMLElement, distance: number = 50, duration: number = 300): void => {
+    element.style.transform = `translateX(${distance}px)`;
+    element.style.opacity = '0';
+    element.style.transition = `transform ${duration}ms ease-in-out, opacity ${duration}ms ease-in-out`;
+    element.style.display = 'block'; // or any other display value
+    setTimeout(() => {
+      element.style.transform = 'translateX(0)';
+      element.style.opacity = '1';
+    }, 10);
+  };
+
+/**
+ * Fades out an element by setting its opacity from 1 to 0.
+ * @param element - The HTML element to fade out.
+ * @param duration - The duration of the animation in milliseconds.
+ */
+export const fadeOut = (element: HTMLElement, duration: number = 300): void => {
+  element.style.opacity = '1';
+  element.style.transition = `opacity ${duration}ms ease-in-out`;
+  setTimeout(() => {
+    element.style.opacity = '0';
+    // Optionally hide the element after the transition
+    setTimeout(() => {
+      element.style.display = 'none';
+    }, duration);
+  }, 10);
+};
+
+/**
+ * Scales in an element by changing its scale value.
+ * @param element - The HTML element to scale in.
+ * @param duration - The duration of the animation in milliseconds.
+ */
+export const scaleIn = (element: HTMLElement, duration: number = 300): void => {
+    element.style.transform = 'scale(0)';
+    element.style.opacity = '0';
+    element.style.transition = `transform ${duration}ms ease-in-out, opacity ${duration}ms ease-in-out`;
+    element.style.display = 'block';
+    setTimeout(() => {
+        element.style.transform = 'scale(1)';
+        element.style.opacity = '1';
+    }, 10);
+};
+
+/**
+ * Scales out an element by changing its scale value.
+ * @param element - The HTML element to scale out.
+ * @param duration - The duration of the animation in milliseconds.
+ */
+export const scaleOut = (element: HTMLElement, duration: number = 300): void => {
+    element.style.transform = 'scale(1)';
+    element.style.opacity = '1';
+    element.style.transition = `transform ${duration}ms ease-in-out, opacity ${duration}ms ease-in-out`;
+    setTimeout(() => {
+        element.style.transform = 'scale(0)';
+        element.style.opacity = '0';
+        setTimeout(() => {
+            element.style.display = 'none';
+        }, duration);
+    }, 10);
+};
