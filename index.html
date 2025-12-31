@@ -1,0 +1,61 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Hero from './components/Hero';
+import FeatureList from './components/FeatureList';
+import { getSiteData } from './mocks/api';
+import { SiteData } from './types';
+
+const App = () => {
+  const [siteData, setSiteData] = React.useState<SiteData | null>(null);
+  const [loading, setLoading] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getSiteData();
+        setSiteData(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch site data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      
+        Loading...
+      
+    );
+  }
+
+  if (!siteData) {
+    return (
+      
+        Error: Could not load site data.
+      
+    );
+  }
+
+  return (
+    
+      
+        <Hero title={siteData.hero.title} description={siteData.hero.description} buttonText={siteData.hero.buttonText} />
+      
+
+      
+        <FeatureList features={siteData.features} />
+      
+    
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+root.render(
+  
+    <App />
+  
+);
